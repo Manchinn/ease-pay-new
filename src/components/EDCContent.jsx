@@ -1,43 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function EDCContent({ setShowDocumentsModal, setShowInstallmentModal }) {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const startX = useRef(0);
+    const containerRef = useRef(null);
+
+    const AUTOPLAY_INTERVAL = 3000; // 3 seconds
 
     const edcSlides = [
-        { src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/359381252_image13.png", alt: "EDC Payment" },
-        { src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/8361f5fbd_Frame21094.png", alt: "ขาย จ่าย จบ" },
-        { src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/096c0d275_Frame21091.png", alt: "รองรับทุกธนาคาร" },
-        { src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/03b003a42_Frame21093.png", alt: "เงินโอนทุกวัน" }
+        { src: "/images/feature-edc.jpg", alt: "EDC Payment" },
+        { src: "/images/feature-easy.jpg", alt: "ขาย จ่าย จบ" },
+        { src: "/images/feature-banks.jpg", alt: "รองรับทุกธนาคาร" },
+        { src: "/images/feature-transfer.jpg", alt: "เงินโอนทุกวัน" }
     ];
 
-    const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
-    const handleTouchMove = (e) => setTouchEnd(e.touches[0].clientX);
-    const handleTouchEnd = () => {
-        if (touchStart - touchEnd > 75) setCurrentSlide((prev) => (prev < 3 ? prev + 1 : 0));
-        if (touchStart - touchEnd < -75) setCurrentSlide((prev) => (prev > 0 ? prev - 1 : 3));
+    // Auto-play effect
+    useEffect(() => {
+        if (isDragging || isPaused) return;
+
+        const timer = setInterval(() => {
+            setCurrentSlide(prev => (prev < edcSlides.length - 1 ? prev + 1 : 0));
+        }, AUTOPLAY_INTERVAL);
+
+        return () => clearInterval(timer);
+    }, [isDragging, isPaused, edcSlides.length]);
+
+    const handleStart = (clientX) => {
+        setIsDragging(true);
+        startX.current = clientX;
     };
+
+    const handleMove = (clientX) => {
+        if (!isDragging) return;
+        const diff = clientX - startX.current;
+        setDragOffset(diff);
+    };
+
+    const handleEnd = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+
+        const threshold = 50; // minimum distance to trigger slide change
+        if (dragOffset < -threshold && currentSlide < edcSlides.length - 1) {
+            setCurrentSlide(prev => prev + 1);
+        } else if (dragOffset > threshold && currentSlide > 0) {
+            setCurrentSlide(prev => prev - 1);
+        }
+        setDragOffset(0);
+    };
+
+    // Touch events
+    const handleTouchStart = (e) => handleStart(e.touches[0].clientX);
+    const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
+    const handleTouchEnd = () => handleEnd();
+
+    // Mouse events
+    const handleMouseDown = (e) => {
+        e.preventDefault();
+        handleStart(e.clientX);
+    };
+    const handleMouseMove = (e) => handleMove(e.clientX);
+    const handleMouseUp = () => handleEnd();
+    const handleMouseLeave = () => {
+        if (isDragging) handleEnd();
+    };
+
+    // Calculate transform with drag offset
+    const containerWidth = containerRef.current?.offsetWidth || 320;
+    const dragPercent = (dragOffset / containerWidth) * 100;
+    const translateX = -(currentSlide * 100) + dragPercent;
 
     return (
         <>
-            {/* EDC Section with Carousel */}
-            <section className="py-8 px-4 bg-white">
-                <h2 className="text-2xl font-bold text-center mb-2">เครื่องรูดบัตร EDC</h2>
-                <p className="text-center text-slate-500 mb-6">รับชำระเงินได้ทุกช่องทาง ในเครื่องเดียว</p>
-                <div className="max-w-[320px] mx-auto rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.1)] touch-pan-x" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-                    <div className="flex transition-transform duration-300 ease-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                        {edcSlides.map((slide, i) => (
-                            <div key={i} className="min-w-full shrink-0">
-                                <img src={slide.src} alt={slide.alt} draggable="false" className="w-full h-auto block" />
-                            </div>
+            {/* EDC Section with Improved Carousel */}
+            <section className="px-4 py-10 bg-white">
+                <div className="text-center space-y-2 mb-8">
+                    <h2 className="text-2xl font-bold text-slate-800">เครื่องรูดบัตร EDC</h2>
+                    <p className="text-slate-600 text-sm">รับชำระเงินได้ทุกช่องทาง ในเครื่องเดียว</p>
+                </div>
+
+                {/* Image Carousel */}
+                <div className="max-w-sm mx-auto select-none">
+                    <div
+                        className="rounded-2xl overflow-hidden h-[320px] bg-slate-50 border border-slate-100"
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                    >
+                        <div
+                            className="flex h-full transition-transform duration-500 ease-out"
+                            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                        >
+                            {edcSlides.map((slide, index) => (
+                                <div
+                                    key={index}
+                                    className="min-w-full h-full flex items-center justify-center p-4 shrink-0"
+                                >
+                                    <img
+                                        src={slide.src}
+                                        alt={slide.alt}
+                                        className="w-full h-full object-contain drop-shadow-sm"
+                                        loading={index === 0 ? "eager" : "lazy"}
+                                        draggable="false"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
+                    {/* Pagination Dots */}
+                    <div className="flex justify-center gap-2 mt-6">
+                        {edcSlides.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentSlide(index)}
+                                className={`h-2 rounded-full transition-all duration-300 border-none cursor-pointer ${currentSlide === index ? 'bg-[#4064FF] w-6' : 'bg-slate-300 w-2'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
                         ))}
                     </div>
-                </div>
-                <div className="flex justify-center gap-2 mt-4">
-                    {edcSlides.map((_, i) => (
-                        <button key={i} className={`w-2 h-2 rounded-full border-none cursor-pointer transition-colors duration-200 ${currentSlide === i ? 'bg-[#4064FF]' : 'bg-slate-200'}`} onClick={() => setCurrentSlide(i)} />
-                    ))}
                 </div>
             </section>
 
