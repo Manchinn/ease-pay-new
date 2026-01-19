@@ -8,8 +8,22 @@ export default function App() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [showInstallmentModal, setShowInstallmentModal] = useState(false);
   const [showDocumentsModal, setShowDocumentsModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isTabSticky, setIsTabSticky] = useState(false);
   const tabRef = useRef(null);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    businessCategory: '',
+    website: '',
+    services: [],
+    acceptPrivacy: false,
+    acceptMarketing: false
+  });
 
   // ตรวจจับว่า tab ชน header หรือยัง
   useEffect(() => {
@@ -50,10 +64,16 @@ export default function App() {
       {/* Header */}
       <header className="header">
         <div className="logo-wrap">
-          <div className="logo-icon">E</div>
-          <span className="logo-text">ease pay</span>
+          <img src="/images/LOGO.png" alt="ease pay" className="logo-img" />
         </div>
-        <button className="btn-primary btn-sm">สมัครฟรี</button>
+        <div className="header-actions">
+          <button className="btn-outline-sm">สมัครฟรี</button>
+          <button className="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -63,7 +83,7 @@ export default function App() {
         <div className="hero-image">
           <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/ac5164d5b_.png" alt="Person holding phone" />
         </div>
-        <button className="btn-primary btn-lg">สมัครเลย</button>
+        <button className="btn-primary btn-lg" onClick={() => setShowRegisterModal(true)}>สมัครเลย</button>
       </section>
 
       {/* Sticky Tab Buttons */}
@@ -89,8 +109,14 @@ export default function App() {
           <section className="edc-section">
             <h2 className="section-title">เครื่องรูดบัตร EDC</h2>
             <p className="section-subtitle">รับชำระเงินได้ทุกช่องทาง ในเครื่องเดียว</p>
-            <div className="carousel" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-              <img src={edcSlides[currentSlide].src} alt={edcSlides[currentSlide].alt} />
+            <div className="carousel-container" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+              <div className="carousel-track" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                {edcSlides.map((slide, i) => (
+                  <div key={i} className="carousel-slide">
+                    <img src={slide.src} alt={slide.alt} draggable="false" />
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="dots">
               {edcSlides.map((_, i) => (
@@ -139,19 +165,28 @@ export default function App() {
 
           {/* Business Cards */}
           <section className="business-section">
-            <h2 className="section-title">Ease Pay รองรับทุกธุรกิจ</h2>
+            <h2 className="section-title">Ease Pay รับชำระได้ทุกธุรกิจ</h2>
             <div className="business-cards">
               <div className="business-card">
-                <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=500&h=400&fit=crop" alt="สปา" />
-                <div className="business-info"><p>คลินิก / สปา</p><ul><li>ใช้งานง่าย</li><li>รองรับผ่อนชำระ</li></ul></div>
+                <img src="/images/business-clinic.png" alt="คลินิก" />
+                <div className="business-info">
+                  <p className="business-title">ธุรกิจบริการ / คลินิก / สปา / เสริมความงาม</p>
+                  <ul><li>ใช้งานง่าย ไม่ต้องเทรนพนักงาน</li><li>รองรับการผ่อนชำระ</li></ul>
+                </div>
               </div>
               <div className="business-card">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=400&fit=crop" alt="ร้านอาหาร" />
-                <div className="business-info"><p>ร้านอาหาร / คาเฟ่</p><ul><li>มีโปรโมชั่นตลอด</li><li>ชำระได้เร็ว</li></ul></div>
+                <img src="/images/business-restaurant.png" alt="ร้านอาหาร" />
+                <div className="business-info">
+                  <p className="business-title">ร้านอาหาร / คาเฟ่ / บาร์ / เครื่องดื่ม</p>
+                  <ul><li>ปิดบิลที่โต๊ะได้ทันที</li><li>ลูกค้าจ่ายได้เร็ว</li></ul>
+                </div>
               </div>
               <div className="business-card">
-                <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=500&h=400&fit=crop" alt="ร้านค้า" />
-                <div className="business-info"><p>ร้านค้าปลีก</p><ul><li>POS+EDC+QR ครบ</li><li>ขายได้ทันที</li></ul></div>
+                <img src="/images/business-retail.png" alt="ร้านค้า" />
+                <div className="business-info">
+                  <p className="business-title">ร้านค้าปลีก / มินิมาร์ท / ซุเปอร์ / ร้านทั่วไป</p>
+                  <ul><li>POS + EDC + QR จบในเครื่องเดียว</li><li>เคาน์เตอร์เร็ว ไม่ต่อคิวยาว</li></ul>
+                </div>
               </div>
             </div>
           </section>
@@ -304,6 +339,111 @@ export default function App() {
               <li>✅ รูปถ่ายป้ายชื่อหน้าร้าน + รูปถ่ายหน้าร้าน</li>
             </ul>
             <div className="doc-note">กรุณาเตรียมเอกสารให้ครบถ้วนเพื่อความสะดวกในการสมัคร</div>
+          </div>
+        </div>
+      )}
+
+      {/* Register Modal */}
+      {showRegisterModal && (
+        <div className="modal-overlay" onClick={() => setShowRegisterModal(false)}>
+          <div className="modal-content modal-register" onClick={e => e.stopPropagation()}>
+            <div className="register-header">
+              <img src="/images/LOGO.png" alt="ease pay" className="register-logo" />
+              <button className="lang-btn">🇹🇭 TH</button>
+            </div>
+
+            <h2 className="register-title">สนใจเปิดบัญชี Ease Pay</h2>
+
+            <form className="register-form" onSubmit={(e) => { e.preventDefault(); alert('ส่งข้อมูลสำเร็จ!'); setShowRegisterModal(false); }}>
+              <div className="form-group">
+                <label>ชื่อ-นามสกุล</label>
+                <input type="text" placeholder="ระบุชื่อ-นามสกุล" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
+              </div>
+
+              <div className="form-group">
+                <label>ชื่อบริษัท / ชื่อร้านค้า</label>
+                <input type="text" placeholder="ระบุชื่อบริษัท / ชื่อร้านค้าสำหรับบุคคลธรรมดา" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
+              </div>
+
+              <div className="form-group">
+                <label>อีเมล</label>
+                <input type="email" placeholder="youremail@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+              </div>
+
+              <div className="form-group">
+                <label>เบอร์โทรศัพท์</label>
+                <input type="tel" placeholder="012-345-6789" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required />
+              </div>
+
+              <div className="form-group">
+                <label>หมวดหมู่ธุรกิจ</label>
+                <input type="text" placeholder="ค้นหาหรือระบุหมวดหมู่ธุรกิจ" value={formData.businessCategory} onChange={(e) => setFormData({ ...formData, businessCategory: e.target.value })} />
+              </div>
+
+              <div className="form-group">
+                <label>เว็บไซต์ / โซเชียลมีเดียธุรกิจ</label>
+                <div className="input-with-tag">
+                  <input type="text" placeholder="ระบุเว็บไซต์ / โซเชียลมีเดียธุรกิจ" value={formData.website} onChange={(e) => setFormData({ ...formData, website: e.target.value })} />
+                  <span className="optional-tag">ไม่บังคับ</span>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>เลือกบริการที่คุณสนใจ</label>
+                <div className="service-options">
+                  <label className={`service-card ${formData.services.includes('online') ? 'selected' : ''}`}>
+                    <input type="checkbox" checked={formData.services.includes('online')} onChange={(e) => {
+                      if (e.target.checked) setFormData({ ...formData, services: [...formData.services, 'online'] });
+                      else setFormData({ ...formData, services: formData.services.filter(s => s !== 'online') });
+                    }} />
+                    <div className="service-icon">💳</div>
+                    <div className="service-info">
+                      <h4>ชำระเงินออนไลน์</h4>
+                      <p>เชื่อมต่อเว็บไซต์และลิงก์ชำระเงิน</p>
+                    </div>
+                    <div className="service-check"></div>
+                  </label>
+                  <label className={`service-card ${formData.services.includes('edc') ? 'selected' : ''}`}>
+                    <input type="checkbox" checked={formData.services.includes('edc')} onChange={(e) => {
+                      if (e.target.checked) setFormData({ ...formData, services: [...formData.services, 'edc'] });
+                      else setFormData({ ...formData, services: formData.services.filter(s => s !== 'edc') });
+                    }} />
+                    <div className="service-icon">🔷</div>
+                    <div className="service-info">
+                      <h4>เครื่องรูดบัตร</h4>
+                      <p>รองรับการผ่อนชำระทุกช่องทาง</p>
+                    </div>
+                    <div className="service-check"></div>
+                  </label>
+                </div>
+              </div>
+
+              <div className="form-group checkbox-group">
+                <label className="checkbox-label">
+                  <input type="checkbox" checked={formData.acceptPrivacy} onChange={(e) => setFormData({ ...formData, acceptPrivacy: e.target.checked })} required />
+                  <span>ยินยอมรับทราบและยอมรับข้อตกลงตามนโยบาย <a href="#">นโยบายความเป็นส่วนตัว</a></span>
+                </label>
+              </div>
+
+              <div className="form-group checkbox-group">
+                <label className="checkbox-label">
+                  <input type="checkbox" checked={formData.acceptMarketing} onChange={(e) => setFormData({ ...formData, acceptMarketing: e.target.checked })} />
+                  <span>ยินยอมและรับทราบ ให้ อีสเพย์ เก็บรวบรวม ใช้ และเปิดเผย เพื่อวัตถุประสงค์ทางการตลาด</span>
+                </label>
+              </div>
+
+              <div className="form-success">
+                <span className="success-icon">✓</span>
+                <span>Success!</span>
+                <div className="form-links">
+                  <a href="#">Privacy</a> · <a href="#">Terms</a>
+                </div>
+              </div>
+
+              <button type="submit" className="btn-primary btn-lg btn-full">ยืนยัน</button>
+
+              <p className="login-link">มีบัญชีอยู่แล้ว? <a href="#">เข้าสู่ระบบ</a></p>
+            </form>
           </div>
         </div>
       )}
