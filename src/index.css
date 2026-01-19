@@ -1,20 +1,18 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
 
-:root {
-  font-family: 'Noto Sans Thai', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@theme {
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
 
-  color-scheme: light;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
