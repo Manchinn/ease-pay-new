@@ -49,7 +49,7 @@ export default function App() {
         />
       )}
 
-      {activeTab === 'link' && <LinkContent />}
+      {activeTab === 'link' && <LinkContent setShowDocumentsModal={setShowDocumentsModal} />}
 
       <SharedContent />
 
