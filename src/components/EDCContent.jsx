@@ -78,8 +78,8 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
             {/* EDC Section with Improved Carousel */}
             <section className="px-4 py-10 bg-white">
                 <div className="text-center space-y-2 mb-8">
-                    <h2 className="text-2xl font-bold text-slate-800">เครื่องรูดบัตร EDC</h2>
-                    <p className="text-slate-600 text-sm">รับชำระเงินได้ทุกช่องทาง ในเครื่องเดียว</p>
+                    <h2 className="text-[26px] font-bold text-slate-800">เครื่องรูดบัตร EDC</h2>
+                    <p className="text-slate-600 text-base">รับชำระเงินได้ทุกช่องทาง ในเครื่องเดียว</p>
                 </div>
 
                 {/* Image Carousel */}
@@ -131,7 +131,7 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
 
             {/* Comparison Section */}
             <section className="py-8 px-4 bg-gradient-to-b from-white to-[#EEF2FF]">
-                <h2 className="text-2xl text-center mb-2">
+                <h2 className="text-[26px] text-center mb-2">
                     <span className="font-bold text-[#0A47CB]">Ease Pay</span><br />
                     <span className="text-slate-600">แตกต่างเจ้าอื่นยังไง</span>
                 </h2>
@@ -142,29 +142,29 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
 
             {/* Benefits Section */}
             <section className="py-8 px-4 bg-white">
-                <h2 className="text-2xl text-center mb-2">
+                <h2 className="text-[26px] text-center mb-2">
                     <span className="font-bold text-[#0A47CB]">ง่ายกว่า เร็วกว่า</span><br />
                     <span className="text-slate-600">โอนเงินทุกวัน</span>
                 </h2>
                 <div className="flex flex-col gap-3">
                     <div className="flex items-start gap-4 p-4 border-2 border-slate-200 rounded-2xl">
                         <div className="w-14 h-14 bg-[#4064FF] rounded-xl flex items-center justify-center shrink-0 p-2"><img src="/images/free.png" alt="free" className="w-full h-full object-contain" /></div>
-                        <div><h3 className="text-base font-semibold mb-1">ฟรีค่าบริการรายเดือน</h3><p className="text-sm text-slate-500">เมื่อมียอดธุรกรรมขั้นต่ำ 100,000 บาทต่อเดือน</p></div>
+                        <div><h3 className="text-lg font-semibold mb-1">ฟรีค่าบริการรายเดือน</h3><p className="text-base text-slate-500">เมื่อมียอดธุรกรรมขั้นต่ำ 100,000 บาทต่อเดือน</p></div>
                     </div>
                     <div className="flex items-start gap-4 p-4 border-2 border-slate-200 rounded-2xl">
                         <div className="w-14 h-14 bg-[#4064FF] rounded-xl flex items-center justify-center shrink-0 p-2"><img src="/images/callcenter.png" alt="callcenter" className="w-full h-full object-contain" /></div>
-                        <div><h3 className="text-base font-semibold mb-1">บริการ Call Center</h3><p className="text-sm text-slate-500">มีเจ้าหน้าที่บริการตลอด 24 ชั่วโมง</p></div>
+                        <div><h3 className="text-lg font-semibold mb-1">บริการ Call Center</h3><p className="text-base text-slate-500">มีเจ้าหน้าที่บริการตลอด 24 ชั่วโมง</p></div>
                     </div>
                     <div className="flex items-start gap-4 p-4 border-2 border-slate-200 rounded-2xl">
                         <div className="w-14 h-14 bg-[#4064FF] rounded-xl flex items-center justify-center shrink-0 p-2"><img src="/images/edc.png" alt="edc" className="w-full h-full object-contain" /></div>
-                        <div><h3 className="text-base font-semibold mb-1">ลดขั้นตอน ขอเครื่องไว</h3><p className="text-sm text-slate-500">ขอเครื่อง EDC ได้ง่ายและสะดวกขึ้น ไม่ต้องวุ่นวายติดต่อหลายธนาคาร</p></div>
+                        <div><h3 className="text-lg font-semibold mb-1">ลดขั้นตอน ขอเครื่องไว</h3><p className="text-base text-slate-500">ขอเครื่อง EDC ได้ง่ายและสะดวกขึ้น ไม่ต้องวุ่นวายติดต่อหลายธนาคาร</p></div>
                     </div>
                 </div>
             </section>
 
             {/* 3 Steps Section */}
             <section className="py-8 px-4 bg-gradient-to-b from-white to-[#EEF2FF] text-center">
-                <h2 className="text-2xl font-bold text-center mb-6 text-[#0A47CB]">3 ขั้นตอน</h2>
+                <h2 className="text-[26px] font-bold text-center mb-6 text-[#0A47CB]">3 ขั้นตอน</h2>
                 <div className="grid grid-cols-3 gap-3 my-6">
                     {/* Step 1 */}
                     <div className="text-center">
@@ -174,9 +174,9 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
                                     <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                                 </svg>
                             </div>
-                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-xs font-bold rounded-full flex items-center justify-center">1</span>
+                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-sm font-bold rounded-full flex items-center justify-center">1</span>
                         </div>
-                        <p className="text-xs font-medium text-[#0A47CB]">ยื่นใบสมัครที่ลิงก์</p>
+                        <p className="text-base font-medium text-[#0A47CB]">ยื่นใบสมัครที่ลิงก์</p>
                     </div>
                     {/* Step 2 */}
                     <div className="text-center">
@@ -186,9 +186,9 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
                                     <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9h-2v2H9v-2H7V9h2V7h2v2h2v2zm0-6V3.5L18.5 9H13z" />
                                 </svg>
                             </div>
-                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-sm font-bold rounded-full flex items-center justify-center">2</span>
                         </div>
-                        <p className="text-xs font-medium text-[#0A47CB]">ตรวจสอบ</p>
+                        <p className="text-base font-medium text-[#0A47CB]">ตรวจสอบ</p>
                     </div>
                     {/* Step 3 */}
                     <div className="text-center">
@@ -198,17 +198,17 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
                                     <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
                                 </svg>
                             </div>
-                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-xs font-bold rounded-full flex items-center justify-center">3</span>
+                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#0A47CB] text-white text-sm font-bold rounded-full flex items-center justify-center">3</span>
                         </div>
-                        <p className="text-xs font-medium text-[#0A47CB]">ติดตั้ง</p>
+                        <p className="text-base font-medium text-[#0A47CB]">ติดตั้ง</p>
                     </div>
                 </div>
-                <button className="bg-white border border-slate-200 rounded-full px-6 py-3 text-sm font-medium cursor-pointer inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-colors hover:bg-gray-50" onClick={() => setShowDocumentsModal(true)}>เอกสารการสมัคร <span className="w-6 h-6 bg-[#4064FF] text-white rounded-full inline-flex items-center justify-center text-base">+</span></button>
+                <button type="button" className="bg-white border border-slate-200 rounded-full px-6 py-3 text-base font-medium cursor-pointer inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-colors hover:bg-gray-50" onClick={() => setShowDocumentsModal(true)}>เอกสารการสมัคร <span className="w-6 h-6 bg-[#4064FF] text-white rounded-full inline-flex items-center justify-center text-lg">+</span></button>
             </section>
 
             {/* Business Cards */}
             <section className="py-8 px-4 bg-gradient-to-b from-white to-gray-100">
-                <h2 className="text-2xl text-center mb-4">
+                <h2 className="text-[26px] text-center mb-4">
                     <span className="font-bold text-[#0A47CB]">Ease Pay</span><br />
                     <span className="text-slate-600">รับชำระได้ทุกธุรกิจ</span>
                 </h2>
@@ -220,7 +220,7 @@ export default function EDCContent({ setShowDocumentsModal, setShowInstallmentMo
             {/* Commission Section */}
             <section className="py-8 px-4 bg-white text-center">
                 <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6961e4107ad4474b9708017a/9734718a7_Screenshot2569-01-12at174812.png" alt="Commission" className="rounded-2xl mb-6 w-full h-auto block" />
-                <button className="bg-white border border-slate-200 rounded-full px-6 py-3 text-sm font-medium cursor-pointer inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-colors hover:bg-gray-50" onClick={() => setShowInstallmentModal(true)}>อัตราผ่อนชำระ <span className="w-6 h-6 bg-[#4064FF] text-white rounded-full inline-flex items-center justify-center text-base">+</span></button>
+                <button type="button" className="bg-white border border-slate-200 rounded-full px-6 py-3 text-base font-medium cursor-pointer inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-colors hover:bg-gray-50" onClick={() => setShowInstallmentModal(true)}>อัตราผ่อนชำระ <span className="w-6 h-6 bg-[#4064FF] text-white rounded-full inline-flex items-center justify-center text-lg">+</span></button>
             </section>
 
             {/* EMV Section */}

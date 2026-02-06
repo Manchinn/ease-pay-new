@@ -30,8 +30,8 @@ export default function App() {
   }, []);
 
   return (
-    <div className="max-w-[480px] mx-auto bg-gray-50 min-h-screen relative font-['Noto_Sans_Thai']">
-      <Header />
+    <div className="max-w-[480px] mx-auto bg-gray-50 min-h-screen relative font-['Noto_Sans_Thai'] text-[18px]">
+      <Header onRegisterClick={() => setShowRegisterModal(true)} />
 
       <Hero activeTab={activeTab} onRegisterClick={() => setShowRegisterModal(true)} />
 
@@ -49,9 +49,14 @@ export default function App() {
         />
       )}
 
-      {activeTab === 'link' && <LinkContent setShowDocumentsModal={setShowDocumentsModal} />}
+      {activeTab === 'link' && (
+        <LinkContent
+          setShowDocumentsModal={setShowDocumentsModal}
+          onRegisterClick={() => setShowRegisterModal(true)}
+        />
+      )}
 
-      <SharedContent />
+      <SharedContent onRegisterClick={() => setShowRegisterModal(true)} />
 
       <Footer />
 
